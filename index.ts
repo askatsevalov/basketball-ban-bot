@@ -25,14 +25,12 @@ const botRequest = ({ url, data }: IBotRequestParams) => {
 bot.on("message", async (msg) => {
   try {
     const chatId = msg.chat.id;
-    console.log("msg > ", msg);
     if (msg.from && msg.dice?.emoji === "🏀") {
-      console.log("!BAN!");
       await botRequest({
         url: "deleteMessage",
         data: { chat_id: chatId, message_id: msg.message_id },
       });
-      console.log("Message deleted");
+      console.log("Message deleted... 🗑️");
       const untilDate = Date.now() + banTimeMs;
       await botRequest({
         url: "sendMessage",
@@ -43,7 +41,7 @@ bot.on("message", async (msg) => {
           ).toLocaleTimeString("ru-RU")}`,
         },
       });
-      console.log("Replied");
+      console.log("Replied... 💬");
       await botRequest({
         url: "banChatMember",
         data: {
@@ -53,11 +51,11 @@ bot.on("message", async (msg) => {
           revoke_messages: false,
         },
       });
-      console.log("User banned");
+      console.log("User banned... 🚫");
     }
   } catch (err) {
     console.error(err);
   }
 });
 
-console.log("Bot started...");
+console.log("Bot started... 🚀");
