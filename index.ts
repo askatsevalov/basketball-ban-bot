@@ -13,7 +13,8 @@ interface IBotRequestParams {
   data: unknown;
 }
 const baseURL = `https://api.telegram.org/bot${token}/`;
-const botRequest = ({ url, data }: IBotRequestParams) => {
+const botRequest = (params: IBotRequestParams) => {
+  const { url, data } = params;
   return axios.request({
     method: "POST",
     baseURL,
